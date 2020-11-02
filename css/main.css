@@ -1,0 +1,13 @@
+/* the call */
+
+body {
+  background-color: cornflowerblue;
+  text-align: center;
+}
+
+.wrong {
+  background-color: brown;
+}
+.right {
+  background-color: chartreuse;
+}

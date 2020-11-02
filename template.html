@@ -1,0 +1,50 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Toyp</title>
+
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+
+  <body>
+    <td>
+      <h1 id="wordbox" style="text-align: left; margin-left: 400;"></h1>
+      <input type="button" onclick="resetWords()" />
+    </td>
+    <br />
+    <td>
+      <input style="font-size: 30" type="text" id="typobox" />
+      <p id="timer">60</p>
+      <p id="wpm"></p>
+    </td>
+    <br />
+    <br />
+    <br />
+    <br />
+    <td>
+      Capitals
+      <input type="range" min="0" max="10" value="0" id="captoggle" />
+    </td>
+    <br />
+    <td>
+      Numbers
+      <input type="checkbox" id = "numtoggle"/>
+    </td>
+    <br />
+    <td>
+      Max Word Length
+      <input type="range" min="4" max="16" value="8" id="wordlength" />
+    </td>
+    <br />
+    <td>
+      Practice Letters
+      <input type="text" style="font-size: 10;" value="" id="targets" />
+    </td>
+    <script src="js/wordlist.js"></script>
+    <script src="js/words.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
