@@ -7,6 +7,9 @@ charcount = 0;
 timing = false;
 timer = 0;
 
+curr_word_display = ''
+
+
 function clock() {
   timing = true
   timer += 1;
@@ -90,11 +93,12 @@ function StartingWords() {
 
 function fillWordBox() {
   document.getElementById("wordbox").innerHTML = "";
+  curr_word_display = ''
   for (i = 0; i < wordstotype.length; i++) {
-    bloo = document.getElementById("wordbox").innerHTML;
 
-    document.getElementById("wordbox").innerHTML = bloo + wordstotype[i];
+    curr_word_display += wordstotype[i];
   }
+  document.getElementById("wordbox").innerHTML = curr_word_display;
 }
 
 function resetWords() {
@@ -123,6 +127,11 @@ function typecheck() {
   targetword = wordstotype[0];
   typed = document.getElementById("typobox").value;
   if (typed.slice(0, typed.length) == targetword.slice(0, typed.length)) {
+
+    document.getElementById("corwordbox").innerHTML = typed.slice(0, typed.length)
+    
+    document.getElementById("wordbox").innerHTML = curr_word_display.slice(typed.length, curr_word_display.length)
+    
     document.getElementById("typobox").classList.add("right")
     document.getElementById("typobox").classList.remove("wrong")
     if (typed == targetword) {
@@ -132,6 +141,7 @@ function typecheck() {
       wordstotype.shift();
       StartingWords();
       fillWordBox();
+      document.getElementById("corwordbox").innerHTML = ''
       console.log(charcount, wordcount);
     }
   } else {
