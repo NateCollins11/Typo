@@ -11,23 +11,30 @@
 
   <body>
     <td>
-      <h1 id="corwordbox" style="text-align: left; margin-left: 400; color: chartreuse; display: inline"></h1><h1 id="wordbox" style="text-align: left; display: inline;"></h1>
+      <h1 id="corwordbox" style="text-align: left; margin-left: 400; color: rgb(57, 197, 1); display: inline"></h1><h1 id="wordbox" style="text-align: left; display: inline;"></h1>
       <br />
       <input type="button" onclick="resetWords()" />
     </td>
     <br />
     <td>
       <input style="font-size: 30" type="text" id="typobox" />
-      <p id="timer">60</p>
+      <p id="timer"></p>
       <p id="wpm"></p>
     </td>
     <br />
     <br />
     <br />
+    Test Speed
+    <input type="checkbox" id = "speedtest"/>
     <br />
     <td>
       Capitals
       <input type="range" min="0" max="10" value="0" id="captoggle" />
+    </td>
+    <br />
+    <td>
+      Punctuation
+      <input type="range" min="0" max="10" value="0" id="punctoggle" />
     </td>
     <br />
     <td>

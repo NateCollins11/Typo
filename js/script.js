@@ -11,6 +11,7 @@ curr_word_display = ''
 
 
 function clock() {
+  if (document.getElementById("speedtest").checked == true){
   timing = true
   timer += 1;
   document.getElementById("timer").innerHTML = String(60 - timer);
@@ -19,25 +20,25 @@ function clock() {
     calculatewpm();
   }
   if (timing == true) {
-    console.log(timer);
     setTimeout(clock, 1000);
   }
+}
 }
 
 function StartingWords() {
   maxwordlength = document.getElementById("wordlength").value;
   targlist = target.split(' ')
-  console.log(targlist)
+
   
   targetviable = false
   for (x = 0; x < wordlist.length; x++){
     targwordvar = true
-    console.log(wordlist[x])
+
     for (i = 0; i < targlist.length; i++){
       retarget = RegExp(targlist[i])
-      console.log(retarget)
+      // console.log(retarget)
         if (retarget.test(wordlist[x]) == false || wordlist[x].length > maxwordlength){
-          console.log(retarget + "not in " + wordlist[x])
+
           targwordvar = false
         }
       }
@@ -64,9 +65,11 @@ function StartingWords() {
           if (Math.random() < caps_freq/10){
           firstletterupper = wordlist[randint].charAt(0).toUpperCase()
           wordtoadd = firstletterupper + wordlist[randint].slice(1)
+          wordtoadd = addPunctuation(wordtoadd)
           wordstotype.push(wordtoadd + " ");
           } else {
-            wordstotype.push(wordlist[randint] + " ");
+            wordtoadd = addPunctuation(wordlist[randint])
+            wordstotype.push(wordtoadd + " ");
           }
         
       
@@ -88,7 +91,6 @@ function StartingWords() {
   }
 }
   
-  console.log(targetviable, wordstotype);
 }
 
 function fillWordBox() {
@@ -108,12 +110,18 @@ function resetWords() {
   wordcount = 0;
   charcount = 0;
   document.getElementById("wordbox").innerHTML = "";
+  document.getElementById("corwordbox").innerHTML = "";
   wordstotype = [];
   target = document.getElementById("targets").value
+  document.getElementById("typobox").value = ''
   StartingWords();
   fillWordBox();
   if (timing == false){
   clock();
+  }
+  if (document.getElementById("speedtest").checked == false){
+    document.getElementById("timer").innerHTML = ''
+  
   }
 }
 
@@ -142,16 +150,47 @@ function typecheck() {
       StartingWords();
       fillWordBox();
       document.getElementById("corwordbox").innerHTML = ''
-      console.log(charcount, wordcount);
+
     }
   } else {
     document.getElementById("typobox").classList.add("wrong")
     document.getElementById("typobox").classList.remove("right")
   }
 
-  console.log(document.getElementById("typobox").value);
 }
 
 function calculatewpm() {
   document.getElementById("wpm").innerHTML = "wpm = " + charcount / 5;
+}
+
+
+function addPunctuation(word) {
+ if (Math.random() < document.getElementById("punctoggle").value / 10){
+
+
+
+puncDecider = Math.random()
+console.log(word, puncDecider)
+if (puncDecider > 0.8){
+  word = word + ','
+} else if (puncDecider > 0.6){
+word = word + '.'
+}else if (puncDecider > 0.5){
+  word = word + '!'
+  }else if (puncDecider > 0.4){
+    word = word + '?'
+    }else if (puncDecider > 0.2){
+      word = '"' + word + '"'
+      }else if (puncDecider > 0.15){
+        word = word + ';'
+        }else if (puncDecider > 0.1){
+          word = word + ':'
+          }else {
+  word = '(' + word + ')'
+}}
+
+return word
+
+
+
 }

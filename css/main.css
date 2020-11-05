@@ -1,7 +1,12 @@
 /* the call */
 
 body {
-  background-color: cornflowerblue;
+  background: rgb(218, 221, 230);
+  background: linear-gradient(
+    rgba(218, 221, 230, 1) 0%,
+    rgb(105, 129, 180) 80%,
+    rgba(92, 115, 164, 1) 100%
+  );
   text-align: center;
   margin-right: 200;
 }
@@ -10,5 +15,5 @@ body {
   background-color: brown;
 }
 .right {
-  background-color: chartreuse;
+  background-color: rgb(57, 197, 1);
 }
