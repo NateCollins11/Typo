@@ -4,6 +4,8 @@ wordstotype = [];
 
 wordcount = 0;
 charcount = 0;
+mistakes = 0;
+streak = 0;
 timing = false;
 timer = 0;
 
@@ -19,6 +21,7 @@ function clock() {
     timing = false;
     calculatewpm();
   }
+
   if (timing == true) {
     setTimeout(clock, 1000);
   }
@@ -109,6 +112,8 @@ function resetWords() {
   timer = 0;
   wordcount = 0;
   charcount = 0;
+  streak = 0
+  mistakes = 0;
   document.getElementById("wordbox").innerHTML = "";
   document.getElementById("corwordbox").innerHTML = "";
   wordstotype = [];
@@ -121,13 +126,16 @@ function resetWords() {
   }
   if (document.getElementById("speedtest").checked == false){
     document.getElementById("timer").innerHTML = ''
-  
   }
+
 }
 
 input = document.getElementById("typobox");
 
 input.addEventListener("keyup", function () {
+  typecheck();
+});
+input.addEventListener("keydown", function () {
   typecheck();
 });
 
@@ -145,6 +153,9 @@ function typecheck() {
     if (typed == targetword) {
       wordcount += 1;
       charcount += targetword.length;
+      streak += targetword.length;
+      document.getElementById("streak").innerHTML = String(streak)
+
       document.getElementById("typobox").value = "";
       wordstotype.shift();
       StartingWords();
@@ -152,11 +163,15 @@ function typecheck() {
       document.getElementById("corwordbox").innerHTML = ''
 
     }
-  } else {
+  } else if (document.getElementById("typobox").className == "right"){
     document.getElementById("typobox").classList.add("wrong")
     document.getElementById("typobox").classList.remove("right")
+    mistakes += 1
+    streak = 0
+    document.getElementById("streak").innerHTML = String(streak)
   }
-
+  document.getElementById("accuracy").innerHTML = String(Math.floor(100 *(charcount - mistakes)/charcount)) + '%'
+  document.getElementById("streak").innerHTML = String(streak)
 }
 
 function calculatewpm() {
